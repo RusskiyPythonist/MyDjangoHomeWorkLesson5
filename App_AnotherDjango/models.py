@@ -1,19 +1,26 @@
 from django.db import models
-from django.contrib import  admin
+from django.contrib import admin
 from django.utils import timezone
 from django.utils.html import format_html
-
+from django.contrib.auth import get_user_model
 
 # Create your models here.
+
+
+User = get_user_model()  # Создание модели пользователя
+
 
 class Advertisement(models.Model):
     title = models.CharField('заголовок', max_length=128)
     text = models.TextField('текст')
     price = models.FloatField('цена')
-    user = models.CharField('пользователь', max_length=126)  # Пользователь (пока-что просто имя)
+
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     auction = models.BooleanField("торг", help_text='Возможен торг или нет', default=False)
+    image = models.ImageField('изображение', upload_to='media/')
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f'Advertisements(id = {self.id}, title = {self.title}, price = {self.price})'

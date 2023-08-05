@@ -15,13 +15,13 @@ class AdvertisementAdmin(admin.ModelAdmin):
         (  # Первый блок
             'Общее',  # Название блока
             {
-                'fields':('title', 'text')
+                'fields':('title', 'text', 'user')
             }
         ),
         (  # Второй блок
             'Финансы',
             {
-                'fields':('price', 'auction'),
+                'fields':('price', 'auction', 'image'),
                 'classes':['collapse'],  # Для скрытия
             }
         ),

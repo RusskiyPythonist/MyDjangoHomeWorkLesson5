@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
 <html lang="en">
 
 <head>
@@ -12,8 +14,7 @@
 </head>
 
 <body>
-
-
+{% block content %}
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
       <a class="nav-link" href="index.html">
@@ -83,5 +84,6 @@
     </form>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 </body>
 </html>
