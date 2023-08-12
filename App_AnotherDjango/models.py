@@ -45,3 +45,16 @@ class Advertisement(models.Model):
                 '<span style = "color:grey; font-weight = bold;">Сегодня в {}</span>', create_time
             )
         return self.update_at.strftime('%d.%m.%Y at %H:%M:%S')
+
+    @admin.display(description='фото')
+    def photo(self):
+        if self.image:  # проверяю что есть картинка
+
+            return format_html(
+                "<img src = '{}' width='100px' heigth = '100px' > ",
+                self.image.url
+            )
+        return format_html(
+            "<img src = 'http://127.0.0.1:8000/media/advertisements/no_image.jpg' width='100px'> heigth = '100px' ",
+
+        )
