@@ -10,11 +10,11 @@ from django.urls import reverse
 def index(request: WSGIRequest):
     advertisements: list[Advertisement] = Advertisement.objects.all()
     context = {'advertisements': advertisements}
-    return render(request, 'index.html', context)
+    return render(request, 'advertisment/index.html', context)
 
 
 def top_sellers(request: WSGIRequest):
-    return render(request, 'top-sellers.html')
+    return render(request, 'advertisment/top-sellers.html')
 
 
 def advertisement_post(request: WSGIRequest):
@@ -31,16 +31,16 @@ def advertisement_post(request: WSGIRequest):
         form = AdvForm()
 
     context = {'form': form}
-    return render(request, 'advertisement-post.html', context)
+    return render(request, 'advertisment/advertisement-post.html', context)
 
 
 def register(request: WSGIRequest):
-    return render(request, 'register.html')
+    return render(request, 'auth/register.html')
 
 
 def login(request: WSGIRequest):
-    return render(request, 'login.html')
+    return render(request, 'auth/login.html')
 
 
 def profile(request: WSGIRequest):
-    return render(request, 'profile.html')
+    return render(request, 'auth/profile.html')
