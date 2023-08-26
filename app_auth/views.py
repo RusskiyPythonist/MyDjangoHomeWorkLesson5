@@ -18,13 +18,15 @@ def login_view(request):
     if user is not None:
         login(request, user)
         return redirect(reverse('profile'))
-    else:
-        return render(request, 'auth/login.html', {"error": 'Пользователь не найден'})
+    return render(request, 'auth/login.html', {"error": 'Пользователь не найден'})
+
 
 @login_required(login_url=reverse_lazy('login'))
 def profile_view(request):
     return render(request, 'auth/profile.html')
 
+
+@login_required(login_url=reverse_lazy('login'))
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
