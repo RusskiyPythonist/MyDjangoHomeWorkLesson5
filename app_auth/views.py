@@ -3,6 +3,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .forms import ExtendedUserCreationForm
 
 def login_view(request):
     if request.method == 'GET':
@@ -30,3 +31,18 @@ def profile_view(request):
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
+
+
+def register_view(request: WSGIRequest):
+    if request.method == 'POST':
+        form = ExtendedUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user = authenticate(username=user.username, password=request.POST['password1'])
+            login(request, user=user)
+            return redirect(reverse('profile'))
+    else:
+        form = ExtendedUserCreationForm()
+
+    context = {'form': form}
+    return render(request, 'auth/register.html', context)
